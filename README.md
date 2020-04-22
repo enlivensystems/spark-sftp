@@ -1,12 +1,10 @@
 # Spark SFTP Connector Library
 
-A library for constructing dataframes by downloading files from SFTP and writing dataframe to a SFTP server
+A library for constructing Dataframes by downloading files from SFTP and writing Dataframe to a SFTP server
 
 ## Requirements
 
-This library requires Spark 2.x.
-
-For Spark 1.x support, please check [spark1.x](https://github.com/springml/spark-sftp/tree/spark1.x) branch.
+This library requires Spark 3.
 
 ## Linking
 You can link against this library in your program at the following ways:
@@ -15,32 +13,24 @@ You can link against this library in your program at the following ways:
 ```
 <dependency>
 	<groupId>com.springml</groupId>
-	<artifactId>spark-sftp_2.11</artifactId>
-	<version>1.1.3</version>
+	<artifactId>spark-sftp_2.12</artifactId>
+	<version>1.2.0</version>
 </dependency>
 
 ```
 
 ### SBT Dependency
 ```
-libraryDependencies += "com.springml" % "spark-sftp_2.11" % "1.1.3"
-```
-
-
-## Using with Spark shell
-This package can be added to Spark using the `--packages` command line option.  For example, to include it when starting the spark shell:
-
-```
-$ bin/spark-shell --packages com.springml:spark-sftp_2.11:1.1.3
+libraryDependencies += "com.springml" % "spark-sftp_2.12" % "1.2.0"
 ```
 
 ## Features
-This package can be used to construct spark dataframe by downloading the files from SFTP server.
+This package can be used to construct spark Dataframe by downloading the files from SFTP server.
 
-This package can also be used to write spark dataframe as a csv|json|acro tp SFTP server
+This package can also be used to write spark Dataframe as a csv|json|acro tp SFTP server
 
 This library requires following options:
-* `path`: FTP URL of the file to be used for dataframe construction
+* `path`: FTP URL of the file to be used for Dataframe construction
 * `username`: SFTP Server Username. 
 * `password`: (Optional) SFTP Server Password. 
 * `pem`: (Optional) Location of PEM file. Either pem or password has to be specified
@@ -59,7 +49,7 @@ This library requires following options:
 ### Scala API
 ```scala
 
-// Construct Spark dataframe using file in FTP server
+// Construct Spark Dataframe using file in FTP server
 val df = spark.read.
             format("com.springml.spark.sftp").
             option("host", "SFTP_HOST").
@@ -73,7 +63,7 @@ val df = spark.read.
             option("inferSchema", "true").
             load("/ftp/files/sample.csv")
 
-// Write dataframe as CSV file to FTP server
+// Write Dataframe as CSV file to FTP server
 df.write.
       format("com.springml.spark.sftp").
       option("host", "SFTP_HOST").
@@ -85,7 +75,7 @@ df.write.
       save("/ftp/files/sample.csv")
 
 
-// Construct spark dataframe using text file in FTP server
+// Construct spark Dataframe using text file in FTP server
  val df = spark.read.
             format("com.springml.spark.sftp").
             option("host", "SFTP_HOST").
@@ -94,7 +84,7 @@ df.write.
             option("fileType", "txt").
             load("config")
             
- // Construct spark dataframe using xml file in FTP server           
+ // Construct spark Dataframe using xml file in FTP server           
             val df = spark.read.
                  format("com.springml.spark.sftp").
                  option("host", "SFTP_HOST").
@@ -103,7 +93,7 @@ df.write.
                  option("fileType", "xml").
                  option("rowTag", "YEAR").load("myxml.xml")
                  
- // Write dataframe as XML file to FTP server           
+ // Write Dataframe as XML file to FTP server           
            
                  df.write.format("com.springml.spark.sftp").
                  option("host", "SFTP_HOST").
@@ -118,7 +108,7 @@ df.write.
 
 ### Java API
 ```java
-// Construct Spark dataframe using file in FTP server
+// Construct Spark Dataframe using file in FTP server
 DataFrame df = spark.read().
 					format("com.springml.spark.sftp").
 				    option("host", "SFTP_HOST").
@@ -127,7 +117,7 @@ DataFrame df = spark.read().
 				    option("fileType", "json").
 				    load("/ftp/files/sample.json")
 
-// Write dataframe as CSV file to FTP server
+// Write Dataframe as CSV file to FTP server
 df.write().
       format("com.springml.spark.sftp").
       option("host", "SFTP_HOST").
@@ -147,7 +137,7 @@ if (nchar(Sys.getenv("SPARK_HOME")) < 1) {
 library(SparkR, lib.loc = c(file.path(Sys.getenv("SPARK_HOME"), "R", "lib")))
 sparkR.session(master = "local[*]", sparkConfig = list(spark.driver.memory = "2g"))
 
-# Construct Spark dataframe using avro file in FTP server
+# Construct Spark Dataframe using Avro file in FTP server
 df <- read.df(path="/ftp/files/sample.avro",
             source="com.springml.spark.sftp",
             host="SFTP_HOST",
@@ -155,7 +145,7 @@ df <- read.df(path="/ftp/files/sample.avro",
             pem="/home/user/mypem.pem",
             fileType="avro")
 
-# Write dataframe as avro file to FTP server
+# Write Dataframe as Avro file to FTP server
 write.df(df,
         path="/ftp/files/sample.avro",
         source="com.springml.spark.sftp",
@@ -168,7 +158,6 @@ write.df(df,
 ### Note
 1. SFTP files are fetched and written using [jsch](http://www.jcraft.com/jsch/). It will be executed as a single process
 2. Files from SFTP server will be downloaded to temp location and it will be deleted only during spark shutdown
-
 
 ## Building From Source
 This library is built with [SBT](http://www.scala-sbt.org/0.13/docs/Command-Line-Reference.html), which is automatically downloaded by the included shell script. To build a JAR file simply run `build/sbt package` from the project root.
