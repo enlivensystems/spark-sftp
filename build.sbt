@@ -14,7 +14,8 @@ libraryDependencies ++= Seq(
   "org.apache.spark" %% "spark-avro" % "3.0.0-preview2" % "provided" exclude("org.mortbay.jetty", "servlet-api")
 )
 
-resolvers += "Spark Package Main Repo" at "https://dl.bintray.com/spark-packages/maven"
+publishConfiguration := publishConfiguration.value.withOverwrite(true)
+publishLocalConfiguration := publishLocalConfiguration.value.withOverwrite(true)
 
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.1.1" % "test"
 libraryDependencies += "org.apache.spark" %% "spark-hive" % "3.0.0-preview2" % "test"
